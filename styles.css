@@ -5,6 +5,10 @@
   --color-black: black;
 }
 
+.text-shadow {
+  text-shadow: 3px 3px 3px black
+}
+
 /* adjektiv styling */
 .text-center {
   text-align: center;

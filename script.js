@@ -66,9 +66,9 @@ function createTodoCard(todoObject) {
   todoCard.append(deleteButton);
 
   // Konfigure elementene med korrekte verdier
-  todoCard.className = "bg-emerald-300"
+  todoCard.className = "bg-slate-500 rounded-xl w-fit"
 titleElement.className = "udnerline"
-deleteButton.className = "bg-red-400 px-2 rounded-full hover:bg-red-700"
+deleteButton.className = "bg-red-800 px-2 rounded-full hover:bg-red-700 hover:shadow-lg hover:shadow-black"
 
   titleElement.textContent = todoObject.title;
   deleteButton.textContent = "X";
