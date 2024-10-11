@@ -1,8 +1,18 @@
 let userInput = document.querySelector("#user-input");
 let todoListElement = document.querySelector("#todo-list");
-
+userInput.addEventListener("submit", handleSubmit);
 let storedTodos = localStorage.getItem("todos"); // fiffig liten trio av koder, studer og memoriser dette
 let convertedTodos = JSON.parse(storedTodos); // JSON.parse Converts a JavaScript Object Notation (JSON) string into an object.
+
+let todos;
+if (storedTodos === null) {
+  // Viss det er første besøk på siden, lag en ny liste
+  todos = [];
+} else {
+  // Viss det var noe lagret i LocalStorage, bruk det
+  todos = convertedTodos;
+}
+
 
 renderTodos (); // kjører denne funksjonen kjører hver gang siden oppdateres
 
@@ -30,7 +40,7 @@ function handleSubmit(event) { // event er et navn
 renderTodos (); // sier at denne funksjonen (som er definert lenger nede) skal kjøre på slutten av denne funksjonen
 }
 
-userInput.addEventListener("submit", handleSubmit);
+
 
 // Denne leser av dataen i et form element
 // og lager et JavaScript objekt for Gjøremålene
@@ -49,12 +59,36 @@ function createTodoCard(todoObject) {
   // Lage alle elementene vi trenger
   let todoCard = document.createElement("li");
   let titleElement = document.createElement("h2");
+  let deleteButton = document.createElement("button");
 
   // Sett de sammen til ett element
   todoCard.append(titleElement);
+  todoCard.append(deleteButton);
 
-  // Konfigure elementene med korrekte verdier
+  // Konfigure elementene med korrekt verdier
   titleElement.textContent = todoObject.title;
+  deleteButton.textContent = "Delete";
+  deleteButton.addEventListener("click", () => {
+    console.log("Deleting todo...");
+
+    // Fjern "todoObject" fra "todos" listen
+    let filteredTodos = todos.filter((todo) => {
+      if (todo.title === todoObject.title) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+
+    console.log(filteredTodos);
+
+    todos = filteredTodos;
+
+    let jsonTodos = JSON.stringify(todos);
+    localStorage.setItem("todos", jsonTodos);
+
+    renderTodos();
+  });
 
   return todoCard;
 }
@@ -76,12 +110,4 @@ function renderTodos() {
 }
 
 
-let todos;
-if (storedTodos === null) {
-  // Viss det er første besøk på siden, lag en ny liste
-  todos = [];
-} else {
-  // Viss det var noe lagret i LocalStorage, bruk det
-  todos = convertedTodos;
-}
 
