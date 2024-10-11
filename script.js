@@ -3,7 +3,6 @@ let todoListElement = document.querySelector("#todo-list");
 
 let storedTodos = localStorage.getItem("todos"); // fiffig liten trio av koder, studer og memoriser dette
 let convertedTodos = JSON.parse(storedTodos); // JSON.parse Converts a JavaScript Object Notation (JSON) string into an object.
-let todos = convertedTodos;
 
 renderTodos (); // kjører denne funksjonen kjører hver gang siden oppdateres
 
@@ -75,3 +74,14 @@ function renderTodos() {
     todoListElement.append(newTodoCard);
   });
 }
+
+
+let todos;
+if (storedTodos === null) {
+  // Viss det er første besøk på siden, lag en ny liste
+  todos = [];
+} else {
+  // Viss det var noe lagret i LocalStorage, bruk det
+  todos = convertedTodos;
+}
+
