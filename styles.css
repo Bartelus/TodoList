@@ -21,3 +21,8 @@
 .bg-secondary {
   background-color: var(--color-secondary);
 }
+
+#user-input {
+display: flex;
+justify-content: center;
+}

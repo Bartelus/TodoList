@@ -19,11 +19,15 @@ renderTodos (); // kjører denne funksjonen kjører hver gang siden oppdateres
 // Dette er det som skal skje når brukeren trykker på
 // Legg til knappen
 function handleSubmit(event) { // event er et navn
-  event.preventDefault();  // Forhindrer den forhåndsdefinerte nettsiden og lastes inn på nytt (refresh)
 
+  /** 
+* @param {HTMLFormElement} form
+*  @returns
+*/
+  
+event.preventDefault();  // Forhindrer den forhåndsdefinerte nettsiden og lastes inn på nytt (refresh)
   console.log("Creating Todo Object...");
   let newTodo = createTodoObject(userInput); // createTodoObject er en funksjon som er definert nedenfor
-
 
 
   console.log("Append new todo to todo list...");
@@ -37,6 +41,9 @@ function handleSubmit(event) { // event er et navn
   localStorage.setItem("todos", jsonTodos);
   console.log(jsonTodos);
 
+console.log("Resetting form element")
+userInput.reset(); // resetter form elementet userInput
+
 renderTodos (); // sier at denne funksjonen (som er definert lenger nede) skal kjøre på slutten av denne funksjonen
 }
 
@@ -45,39 +52,45 @@ renderTodos (); // sier at denne funksjonen (som er definert lenger nede) skal k
 // Denne leser av dataen i et form element
 // og lager et JavaScript objekt for Gjøremålene
 function createTodoObject(form) { // form er et navn (tror jeg)
-  let todo = form.querySelector("#todo");
-  let todoValue = todo.value;
+  let entodo = form.querySelector("#todo");
+  let todoValue = entodo.value;
 
   let todoObject = {
     title: todoValue,
+    createAt: new Date().toISOString(), 
   };
 
   return todoObject;
 }
 
-function createTodoCard(todoObject) {
+function createTodoCard(todoObject) //(todoObject) matcher denne funksjonen med egendefinert variabel 
+{
   // Lage alle elementene vi trenger
   let todoCard = document.createElement("li");
   let titleElement = document.createElement("h2");
-  let deleteButton = document.createElement("button");
+  let deleteButton = document.createElement("div");
+  let kryss = document.createElement("img");
 
-  // Sett de sammen til ett element
+
+  // putter titleElement og deleteButton inn under todoCard
   todoCard.append(titleElement);
   todoCard.append(deleteButton);
+  deleteButton.append(kryss);
 
   // Konfigure elementene med korrekte verdier
-  todoCard.className = "bg-slate-500 rounded-xl w-fit"
-titleElement.className = "udnerline"
-deleteButton.className = "bg-red-800 px-2 rounded-full hover:bg-red-700 hover:shadow-lg hover:shadow-black"
+  todoCard.className = "bg-slate-500 rounded-xl";
+titleElement.className = "underline";
+deleteButton.className = "bg-red-800 w-12 px-2 rounded-full hover:bg-red-700 hover:shadow-lg hover:shadow-black";
 
   titleElement.textContent = todoObject.title;
-  deleteButton.textContent = "X";
+
+  kryss.src = "images/forbudt.svg";
   deleteButton.addEventListener("click", () => {
     console.log("Deleting todo...");
 
     // Fjern "todoObject" fra "todos" listen
-    let filteredTodos = todos.filter((todo) => {
-      if (todo.title === todoObject.title) {
+    let filteredTodos = todos.filter((entodo) => {
+      if (entodo.createAt === todoObject.createAt) { // bruke createAt til å filtrere ut
         return false;
       } else {
         return true;
@@ -103,10 +116,10 @@ function renderTodos() {
   todoListElement.innerHTML = "";
 
   console.log("Appending all todos to the Document...");
-  todos.forEach((todo, index) => {
+  todos.forEach((entodo, index) => {
 
     // Lager HTML elementet for dette gjøremålet
-    let newTodoCard = createTodoCard(todo); 
+    let newTodoCard = createTodoCard(entodo); 
 
     // Legg det nye html element til i Dokumentet
     todoListElement.append(newTodoCard);
