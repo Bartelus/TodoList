@@ -126,5 +126,5 @@ function renderTodos() {
   });
 }
 
-
-
+// Hente level value fra scrapt.js
+let importLevel = localStorage.getItem('levelExport')

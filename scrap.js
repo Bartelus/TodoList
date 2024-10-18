@@ -22,3 +22,6 @@ listeBeholder.append(levelOutput);
 levelList.className = "min-w-full h-12";
 levelOutput.className = "text-center text-yellow-500 text-3xl animate-pulse";
 });
+
+// lagre verdi til local storage:
+localStorage.setItem('levelExport', 'levelValue')
