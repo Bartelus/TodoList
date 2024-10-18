@@ -25,7 +25,7 @@ function handleSubmit(event) { // event er et navn
 *  @returns
 */
   
-event.preventDefault();  // Forhindrer den forhåndsdefinerte nettsiden og lastes inn på nytt (refresh)
+event.preventDefault();  // Forhindrer den forhåndsdefinerte nettsiden og lastes inn på nytt (refresh) dette gjør at man ikke legger itl hele listen på nytt hver gang
   console.log("Creating Todo Object...");
   let newTodo = createTodoObject(userInput); // createTodoObject er en funksjon som er definert nedenfor
 
@@ -80,7 +80,7 @@ function createTodoCard(todoObject) //(todoObject) matcher denne funksjonen med 
   // Konfigure elementene med korrekte verdier
   todoCard.className = "bg-slate-500 rounded-xl";
 titleElement.className = "underline";
-deleteButton.className = "bg-red-800 w-12 px-2 rounded-full hover:bg-red-700 hover:shadow-lg hover:shadow-black";
+deleteButton.className = "bg-red-800 w-14 px-2 rounded hover:bg-red-700 hover:shadow-lg hover:shadow-black";
 
   titleElement.textContent = todoObject.title;
 

@@ -5,15 +5,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
+    <script src="https://cdn.tailwindcss.com"> </script>
+    <script type="module" src="scrap.js"></script>
   </head>
-  <body>
+  <body class="bg-gray-900">
     <nav>
-      <a href="/">Home</a>
-      <a href="/page2.html" aria-current="page">Other page</a>
+      <a href="/" class="bg-purple-900 h-8 text-white rounded-md  hover:bg-purple-600">Home</a>
+
     </nav>
     <main>
-      <h1>My other page</h1>
+      <h1 class="text-center text-white">Set level</h1>
+
+      <form id="user-input"> 
+        <label for="level" class="text-white"> Level </label>
+        <input type="number" name="level" id="level" />  
+<button type="button" class="bg-rose-900 h-8 text-white rounded-md hover:bg-rose-600" id="levelSubmit"> Legg til </button>
+
+      </form>
+
     </main>
   </body>
 </html>
